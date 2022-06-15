@@ -1,11 +1,13 @@
 -- Use this file to define your SQL tables
 -- The SQL in this file will be executed when you run `npm run setup-db`
+DROP table if exists books_authors;
 DROP table if exists authors;
+DROP table if exists books;
 
 CREATE table authors (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   name VARCHAR NOT NULL,
-  dob DATE,
+  dob VARCHAR,
   pob VARCHAR
 );
 
@@ -20,7 +22,6 @@ INSERT INTO authors (name, dob, pob) VALUES
 ('David Halliday', '1916-03-03', 'Maple Falls, Washington'),
 ('Robert Resnick', '1923-01-11', 'Pittsburgh, Pennsylvania');
 
-DROP table if exists books;
 
 CREATE table books (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -49,7 +50,6 @@ INSERT INTO books (title, released) VALUES
 ('Cytonic', 2021),
 ('Fundamentals of Physics', 1960);
 
-DROP table if exists books_authors;
 
 CREATE table books_authors (
   id BIGINT GENERATED ALWAYS AS IDENTITY,
