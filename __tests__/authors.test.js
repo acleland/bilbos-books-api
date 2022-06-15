@@ -13,6 +13,7 @@ describe('authors routes', () => {
     const alexander = res.body.find((author) => author.id === '1');
     expect(alexander).toHaveProperty('name', 'Alexander Humplebump');
     expect(alexander).toHaveProperty('dob', '1947-06-16');
+    expect(alexander).toHaveProperty('pob', 'Alexandria, VA, USA');
   });
   afterAll(() => {
     pool.end();
