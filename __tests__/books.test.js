@@ -17,7 +17,7 @@ describe('books routes', () => {
   it('should return details for a book, including list of authors', async () => {
     const res = await request(app).get('/books/1');
     const expected = {
-      id: 1,
+      id: '1',
       title: 'Good Omens',
       released: 1990,
       authors: [
