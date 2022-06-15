@@ -14,6 +14,30 @@ describe('books routes', () => {
     expect(goodOmens).toHaveProperty('title', 'Good Omens');
     expect(goodOmens).toHaveProperty('released', 1990);
   });
+  it('should return details for a book, including list of authors', async () => {
+    const res = await request(app).get('/books/1');
+    const expected = {
+      id: 1,
+      title: 'Good Omens',
+      released: 1990,
+      authors: [
+        {
+          id: 2,
+          name: 'Neil Gaiman',
+          dob: '1960-11-10',
+          pob: 'Portchester, Hampshire, England',
+        },
+        {
+          id: 7,
+          name: 'Terry Pratchett',
+          dob: '1948-04-28',
+          pob: 'Beaconsfield, Buckinghamshire, England',
+        },
+      ],
+    };
+    expect(res.body).toEqual(expected);
+  });
+
   afterAll(() => {
     pool.end();
   });
