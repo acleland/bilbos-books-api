@@ -46,6 +46,16 @@ describe('books routes', () => {
     expect(res.body.title).toEqual('Sense and Sensibility');
   });
 
+  it('POST /books should create a new book with an authors', async () => {
+    const res = await request(app)
+      .post('/books')
+      .send({ title: 'Sense and Sensibility', released: 1811, authorIds: [3] });
+    expect(res.status).toBe(200);
+    expect(res.body.title).toEqual('Sense and Sensibility');
+    const { body: sense } = await request(app).get(`/books/${res.body.id}`);
+    expect(sense.authors.length).toBe(1);
+  });
+
   afterAll(() => {
     pool.end();
   });
