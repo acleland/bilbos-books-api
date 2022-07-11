@@ -38,6 +38,14 @@ describe('books routes', () => {
     expect(res.body).toEqual(expected);
   });
 
+  it('POST /books should create a new book', async () => {
+    const res = await request(app)
+      .post('/books')
+      .send({ title: 'Sense and Sensibility', released: 1811 });
+    expect(res.status).toBe(200);
+    expect(res.body.title).toEqual('Sense and Sensibility');
+  });
+
   afterAll(() => {
     pool.end();
   });
