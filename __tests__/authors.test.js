@@ -26,6 +26,18 @@ describe('authors routes', () => {
     const res = await request(app).get('/authors/3');
     expect(res.body).toEqual(jane);
   });
+
+  it('should post a new author', async () => {
+    const katie = {
+      name: 'Katie Katerson',
+      dob: '1980-04-01',
+      pob: 'Katieton, Katetucky',
+    };
+
+    const res = await request(app).post('/authors').send(katie);
+    expect(res.status).toBe(200);
+    expect(res.body.name).toEqual(katie.name);
+  });
   afterAll(() => {
     pool.end();
   });
