@@ -15,6 +15,17 @@ describe('authors routes', () => {
     expect(alexander).toHaveProperty('dob', '1947-06-16');
     expect(alexander).toHaveProperty('pob', 'Alexandria, VA, USA');
   });
+
+  it('should return an author by id', async () => {
+    const jane = {
+      id: '3',
+      name: 'Jane Austen',
+      dob: '1775-12-16',
+      pob: 'Steventon Rectory, Hampshire, England',
+    };
+    const res = await request(app).get('/authors/3');
+    expect(res.body).toEqual(jane);
+  });
   afterAll(() => {
     pool.end();
   });
